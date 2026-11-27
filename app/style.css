@@ -1,0 +1,207 @@
+/* DealDrop — a Black Friday deal finder. Warm paper, ink text, one red
+   accent for the sale, and verdict badges a shopper can read at a glance.
+   Layout: a single column on a phone, three deal cards across on desktop. */
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: #faf5ec;
+  color: #211d18;
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+a { color: #a31621; }
+a:visited { color: #7d2230; }
+
+header.site {
+  background: #211d18;
+  color: #faf5ec;
+  padding: 14px 20px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 22px;
+}
+.brand {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #faf5ec;
+  text-decoration: none;
+}
+.brand span { color: #ffb703; }
+.tag { margin: 0; color: #d8cfc2; font-size: 13px; }
+header.site nav { margin-left: auto; display: flex; gap: 18px; }
+header.site nav a { color: #ffd9a0; font-size: 14px; }
+
+main { max-width: 1180px; margin: 0 auto; padding: 0 20px 40px; }
+
+.hero { padding: 26px 0 8px; }
+.kicker {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #a31621;
+}
+.hero h1 { margin: 0 0 8px; font-size: 40px; line-height: 1.1; letter-spacing: -1px; }
+.lede { margin: 0; max-width: 760px; font-size: 17px; color: #4a443c; }
+.stats {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.stats li { font-size: 14px; color: #4a443c; }
+.stats strong { font-size: 22px; color: #211d18; margin-right: 4px; }
+
+.filters {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: end;
+  margin: 20px 0 6px;
+  padding: 12px 14px;
+  background: #fffdf8;
+  border: 1px solid #e3d9c8;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(33, 29, 24, 0.06);
+}
+.filters label { font-size: 12px; font-weight: 700; color: #6b6257; display: grid; gap: 3px; }
+.filters label.search { flex: 1 1 220px; }
+.filters input[type="search"], .filters select {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  color: #211d18;
+  padding: 8px 10px;
+  border: 1px solid #c9bda6;
+  border-radius: 8px;
+  background: #fff;
+  min-width: 0;
+}
+.filters label.check { display: flex; align-items: center; gap: 6px; padding-bottom: 8px; font-size: 14px; }
+.filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: #a31621; }
+
+.count { margin: 8px 2px 14px; font-size: 14px; color: #6b6257; }
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+.card {
+  background: #fffdf8;
+  border: 1px solid #e3d9c8;
+  border-radius: 12px;
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cat {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #6b6257;
+}
+.verdict {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.verdict-new-low { background: #146c43; color: #fff; }
+.verdict-strong { background: #ffb703; color: #211d18; }
+.verdict-routine { background: #e3d9c8; color: #4a443c; }
+.card h3 { margin: 0; font-size: 18px; line-height: 1.3; }
+.card h3 a { color: #211d18; text-decoration: none; }
+.card h3 a:hover { text-decoration: underline; }
+.store { margin: 0; font-size: 14px; font-weight: 600; color: #a31621; }
+.price { margin: 0; font-size: 15px; }
+.price strong { font-size: 24px; color: #211d18; }
+.price s { color: #8a8175; }
+.price em { display: block; font-style: normal; font-weight: 700; color: #146c43; }
+.note { margin: 0; font-size: 14px; color: #4a443c; flex: 1; }
+.meta { margin: 0; font-size: 12px; color: #8a8175; }
+.cond {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #7a4a00;
+  background: #fff3d6;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+.actions { margin: 4px 0 0; display: flex; gap: 12px; align-items: center; }
+.go {
+  display: inline-block;
+  background: #a31621;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+.go:visited { color: #fff; }
+.go-source { background: #211d18; }
+.details { font-size: 14px; }
+.empty { grid-column: 1 / -1; padding: 30px; text-align: center; color: #6b6257; }
+
+.how {
+  margin-top: 34px;
+  border-top: 2px solid #e3d9c8;
+  padding-top: 18px;
+}
+.how h2 { margin: 0 0 10px; font-size: 20px; }
+.how dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin: 0 0 12px; align-items: center; }
+.how dd { margin: 0; font-size: 15px; color: #4a443c; }
+.how p { max-width: 760px; color: #4a443c; }
+
+.back { margin: 22px 0 0; }
+.detail { background: #fffdf8; border: 1px solid #e3d9c8; border-radius: 12px; padding: 20px 24px; margin-top: 12px; }
+.detail h1 { margin: 6px 0 2px; font-size: 30px; line-height: 1.2; }
+.big-price { margin: 12px 0 0; }
+.big-price strong { font-size: 40px; }
+.big-price s { font-size: 20px; color: #8a8175; margin-left: 8px; }
+.big-off { margin: 2px 0 14px; font-size: 18px; font-weight: 700; color: #146c43; }
+.facts { display: grid; grid-template-columns: 170px 1fr; gap: 10px 16px; margin: 0 0 16px; }
+.facts dt { font-weight: 700; font-size: 14px; color: #6b6257; }
+.facts dd { margin: 0; font-size: 15px; }
+.similar { margin-top: 30px; }
+.similar h2 { font-size: 20px; }
+
+footer.site {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 30px;
+  font-size: 13px;
+  color: #8a8175;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .hero h1 { font-size: 32px; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 28px; }
+  .detail h1 { font-size: 24px; }
+  .facts { grid-template-columns: 1fr; gap: 2px 0; }
+  .facts dd { margin-bottom: 10px; }
+  header.site nav { margin-left: 0; }
+  .filters { position: static; }
+}
