@@ -20,7 +20,7 @@
 // Serve the site locally while working on it with `node serve.ts`, then
 // open http://localhost:8080.
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
@@ -29,6 +29,10 @@ const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
 mkdirSync(out, { recursive: true });
+// Clear any earlier run's copies first: without this, a file removed from
+// app/ or screenshots/ since the last run would silently survive in /output.
+rmSync(join(out, 'app'), { recursive: true, force: true });
+rmSync(join(out, 'screenshots'), { recursive: true, force: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
 mkdirSync(join(out, 'screenshots'), { recursive: true });
 if (existsSync(join(here, 'screenshots'))) {
